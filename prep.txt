@@ -1,0 +1,79 @@
+String:
+    *byte (первый байт)
+    len
+
+    for range = runes
+    пwжэ[0,2,3,5]
+    en = 1 bytes
+    ru = 2 bytes
+    ch = 3 bytes
+
+    кодировка:
+    1 байт  0xxxxxxx
+    2 байт  110xxxxx 10xxxxxx
+    3 байт  1110xxxx 10xxxxxx 10xxxxxx
+    4 байт  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+
+Slice:
+    *[array]
+    len
+    cap
+
+    append:
+        (oldcap + 3 * 256) / 4
+
+Interface:
+    *itab (type, empty in interface{})
+    *data
+
+Channels:
+    "4 Аксиомы"
+    Closed:
+        read: value -> zero value
+        write: panic
+    Nil:
+        read: deadlock
+        write: deadlock
+
+Map:
+    nil assignment -> panic
+
+Goroutines:
+    Goroutine Stack:
+        2kb -> 1gb   (64)
+        2kb -> 250mb (32)
+
+        Split-Stack
+        Growable Stack
+    Scheduler:
+        Order:
+            Local
+            Global
+            NetPoller
+            Work Stealing
+
+        Global Queue
+        Processors (GOMAXPROCS):
+            Local Queue
+        Net Poller:
+            Файловые дескрипторы
+    // Goroutine Switch:   40-100 cycles
+    // Thread Switch:      1000 cycles
+
+Типы сисколлов:
+    sync:  IO
+    async: network
+
+Типы конкуренции:
+    Go              (неявно вытесняющая)
+    кооперативная   (горутины общаются между собой)
+    вытесняющая     (планировщик/компилятор)
+
+Примитивы синхронизации:
+    channels
+    sync.Pool
+    sync.WaitGroup
+    sync.Atomic
+    sync.Mutex
+    sync.RWmutex
+    sync.Cond
