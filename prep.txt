@@ -1,21 +1,20 @@
 String:
-    *byte (первый байт)
+    *byte (first byte)
     len
 
-    for range = runes
-    пwжэ[0,2,3,5]
+    for range iterates over runes
     en = 1 bytes
     ru = 2 bytes
     ch = 3 bytes
 
-    кодировка:
-    1 байт  0xxxxxxx
-    2 байт  110xxxxx 10xxxxxx
-    3 байт  1110xxxx 10xxxxxx 10xxxxxx
-    4 байт  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+    UTF-8 encoding:
+    1 bytes  0xxxxxxx
+    2 bytes  110xxxxx 10xxxxxx
+    3 bytes  1110xxxx 10xxxxxx 10xxxxxx
+    4 bytes  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 
 Slice:
-    *[array]
+    *[first element of array]
     len
     cap
 
@@ -27,7 +26,7 @@ Interface:
     *data
 
 Channels:
-    "4 Аксиомы"
+    "4 axioms"
     Closed:
         read: value -> zero value
         write: panic
@@ -40,36 +39,50 @@ Map:
 
 Goroutines:
     Goroutine Stack:
-        2kb -> 1gb   (64)
-        2kb -> 250mb (32)
+        What is responsible for goroutine stack growth?
+
+        runtime/proc.go -> newproc/newproc1
+
+        2kb -> 1gb   (64bit)
+        2kb -> 250mb (32bit)
 
         Split-Stack
         Growable Stack
+
     Scheduler:
+        What causes a goroutine to be paused?
+            10ms timer
+            Finished Work
+
+        What determines the safe-to-stop places?
+            compiler
+
         Order:
             Local
             Global
             NetPoller
             Work Stealing
 
-        Global Queue
-        Processors (GOMAXPROCS):
-            Local Queue
-        Net Poller:
-            Файловые дескрипторы
-    // Goroutine Switch:   40-100 cycles
-    // Thread Switch:      1000 cycles
+        Structure:
+            Global Queue
+            Processors (GOMAXPROCS):
+                Local Queue
+            Net Poller:
+                file descriptors
 
-Типы сисколлов:
+    // Goroutine context switch:   40-100 cycles
+    // OS thread context switch:      1000 cycles
+
+Syscalls:
     sync:  IO
     async: network
 
-Типы конкуренции:
+Types of concurrency:
     Go              (неявно вытесняющая)
     кооперативная   (горутины общаются между собой)
     вытесняющая     (планировщик/компилятор)
 
-Примитивы синхронизации:
+Sync primitives:
     channels
     sync.Pool
     sync.WaitGroup
