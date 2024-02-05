@@ -8,7 +8,6 @@ type slice struct {
 }
 ```
 
-```go
-slice := append(slice, 1):
-// (oldcap + 3 * 256) / 4
-```
+## Append
+
+(oldcap + 3 * 256) / 4
