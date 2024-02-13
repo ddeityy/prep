@@ -1,17 +1,4 @@
 
-Interface:
-*itab (type, empty in interface{})
-*data
-
-Channels:
-"4 Аксиомы"
-Closed:
-    read: value -> zero value
-    write: panic
-Nil:
-    read: deadlock
-    write: deadlock
-
 Map:
 nil assignment -> panic
 
@@ -23,80 +10,13 @@ Arena:
     64mb (linux)
     4mb  (other)
 
-
-
-Functions:
-scope is used for AST optimization by the compiler
-    {
-    x := 1
-    }
-
-Escape analisys:
-    Heap:
-        Pointer return
-        interface{}
-        var > stack size
-    Stack:
-        return x
-
-Call stack:
-    top-level:
-        func do (b int) {}
-
-    method with value receiver:
-        func (A) do() {}
-
-    method with pointer receiver:
-        func (*A) do() {}
-
-    func literal:
-        anonymous func
-        closure
-
-Prologue:
-    Function prologue is a few lines of code at the beginning of a function that prepares the stack and registers for use within the function.
-    It checks if the stack space needed for the function's local variables exceeds the available stack size.
-    If the stack space needed exceeds the available stack size, the runtime.morestack_noctxt function is called to extend the stack
-
-Goroutines:
-Когда можно приостановить горутину:
-    safe point - компилятор
-    finish
-    10ms
-
-Создание и стек:
-    proc.go -> newproc(*func)
-
 Memory leaks:
     Утечка переменной внутри горутины (не закрытый канал)
     Бесконечная запись в глобальные переменные
     CGO - выключает GC
 
-Goroutine Stack:
-    2kb -> 1gb   (64)
-    2kb -> 250mb (32)
 
-    os thread -> 2-4mb
 
-    Split-Stack:
-        jump between 2 stacks
-    Growable Stack:
-        grow and shrink 1 stack
-
-Scheduler:
-    Order:
-        Local
-        Global
-        NetPoller
-        Work Stealing
-
-    Global Queue
-    Processors (GOMAXPROCS):
-        Local Queue
-    Net Poller:
-        Файловые дескрипторы
-// Goroutine Switch:   40-100 cyc
-// Thread Switch:      1000 cyc
 
 Типы сисколлов:
 sync:  read, write
@@ -106,15 +26,6 @@ async: network
 кооперативная       (горутины общаются между собой)
 вытесняющая         (планировщик/компилятор)
 неявно вытесняющая  (Go)
-
-Примитивы синхронизации:
-channels
-sync.Pool
-sync.WaitGroup
-sync.Atomic
-sync.Mutex
-sync.RWmutex
-sync.Cond
 
 OOP:
 Принципы
@@ -126,7 +37,7 @@ Patterns:
     abs factory
     builder
 Clean architecture
-Otkazoustoychivost patterns:
+Resicience patterns:
     repeater
     breaker
     rate limiter
