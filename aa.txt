@@ -1,32 +1,3 @@
-
-Map:
-nil assignment -> panic
-
-Memory:
-
-Arena -> Object Class -> Spans -> Pages
-
-Arena:
-    64mb (linux)
-    4mb  (other)
-
-Memory leaks:
-    Утечка переменной внутри горутины (не закрытый канал)
-    Бесконечная запись в глобальные переменные
-    CGO - выключает GC
-
-
-
-
-Типы сисколлов:
-sync:  read, write
-async: network
-
-Типы конкуренции:
-кооперативная       (горутины общаются между собой)
-вытесняющая         (планировщик/компилятор)
-неявно вытесняющая  (Go)
-
 OOP:
 Принципы
 SOLID
@@ -43,9 +14,3 @@ Resicience patterns:
     rate limiter
     retrier
 
-Network:
-    OSI
-    транки
-    GRPC под капотом:
-        режимы:
-            унарный
