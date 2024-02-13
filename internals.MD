@@ -163,6 +163,7 @@ Hash(func name, args types, return types)
 
 # Планировщик
     
+    ![scheduler](/scheduler.png "scheduler")
 
     GoMaxProcs - максимальные кол-во процессоров
     Если поставить выше макс кол-ва ядер ОС,
